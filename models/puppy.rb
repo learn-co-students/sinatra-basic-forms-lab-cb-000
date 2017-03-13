@@ -7,3 +7,13 @@ class Puppy
 		@age = age
 	end
 end
+
+#will also work like this....
+#in app.rb.  =>   @puppy = Puppy.new(params)
+#in puppy.rb.   
+# => def initialize(info)
+# => 	@name= info['name']
+# => 	@breed= info['breed']
+# =>  	@age= info['age']
+#However, this test calls for three arguments so can't
+#do it this way here.   
