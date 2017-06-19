@@ -1,0 +1,8 @@
+<h2>Create a new puppy record</h2>
+<form method="POST" action="<%= '/' + DISPLAY %>">
+  <p>NAME: <input type="text" name="<%= Puppy.name_symbol.to_s %>"</p>
+  <p>BREED: <input type="text" name="<%= Puppy.breed_symbol.to_s %>"></p>
+  <p>AGE: <input type="text" name="<%= Puppy.age_symbol.to_s %>"></p>
+  <br>
+  <input type="submit" value="Submit"/>
+</form>
