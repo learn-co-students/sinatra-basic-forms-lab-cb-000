@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+  </head>
+  <body>
+    <p><a href='/new'>Click Here To List A Puppy</a></p>
+
+   <% if @puppy != nil %>
+     Puppy Name:<p> <%= @puppy.name %> <p/>
+     Puppy Breed:<p> <%= @puppy.breed %> <p/>
+     Puppy Age:<p> <%= @puppy.age %> <p/>
+   <% end %>
+  
+  </body>
+</html>
