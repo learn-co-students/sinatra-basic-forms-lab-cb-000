@@ -1,17 +1,16 @@
-# A sample Gemfile
+#Gemfile
 source "https://rubygems.org"
 
-# gem "rails"
-
+#what's the deal with require_all?
 gem 'sinatra'
-    gem 'rake'
-    gem 'thin'
-    gem 'shotgun'
-    gem 'pry'
-    gem 'require_all'
-    
+gem 'rake'
+gem 'thin'
+gem 'shotgun'
+gem 'pry'
+gem 'require_all'
+
 group :test do
-      gem 'rspec'
-      gem 'capybara'
-      gem 'rack-test'
-    end
+  gem 'rspec'
+  gem 'capybara'
+  gem 'rack-test'
+end
