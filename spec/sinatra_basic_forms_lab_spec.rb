@@ -2,24 +2,24 @@ require 'pry'
 describe App do
 
   describe 'GET /' do
-    
+
     it 'sends a 200 status code' do
       get '/'
       expect(last_response.status).to eq(200)
     end
 
-    it 'has a link with the text "List a Puppy"' do 
+    it 'has a link with the text "List a Puppy"' do
       visit '/'
       expect(page).to have_link("List a Puppy")
     end
 
-    it 'has a link to list a puppy that links to /new' do 
+    it 'has a link to list a puppy that links to /new' do
       visit '/'
       expect(page).to have_link("List a Puppy", href: '/new')
     end
   end
 
-  describe 'GET /new' do 
+  describe 'GET /new' do
     it 'sends a 200 status code' do
       get '/new'
       expect(last_response.status).to eq(200)
@@ -32,7 +32,7 @@ describe App do
 
       #form method attribute is a post
       expect(page.find('form')[:method]).to match(/post/i)
-      
+
       expect(page).to have_field(:name)
       expect(page).to have_field(:breed)
       expect(page).to have_field(:months_old)
@@ -47,21 +47,21 @@ describe App do
       fill_in(:name, :with => "Butch")
       fill_in(:breed, :with => "Mastiff")
       fill_in(:months_old, :with => "6")
-      
-      #the below css will match any element (input or button) 
+
+      #the below css will match any element (input or button)
       #with a type attribute set to submit
       page.find(:css, '[type=submit]').click
     end
 
-    it "sends a 200 status code" do 
+    it "sends a 200 status code" do
       expect(page.status_code).to eq(200)
     end
 
     it "recieves a request from /new at /puppy" do
       expect(page.current_path).to eq("/puppy")
     end
-      
-    it "displays the puppy information dynamically" do 
+
+    it "displays the puppy information dynamically" do
       # The \s below will match any whitespace
       expect(page).to have_text(/Name:\s+Butch/i)
       expect(page).to have_text(/Breed:\s+Mastiff/i)
@@ -74,7 +74,7 @@ describe App do
       fill_in(:breed, :with => "Poodle")
       fill_in(:months_old, :with => "9")
 
-      #the below css will match any element (input or button) 
+      #the below css will match any element (input or button)
       #with a type attribute set to submit
       page.find(:css, '[type=submit]').click
 
