@@ -1,87 +1,46 @@
-require 'pry'
 describe App do
 
   describe 'GET /' do
-    
+
     it 'sends a 200 status code' do
       get '/'
       expect(last_response.status).to eq(200)
     end
 
-    it 'has a link with the text "List a Puppy"' do 
+    it 'renders welcome' do
       visit '/'
-      expect(page).to have_link("List a Puppy")
-    end
-
-    it 'has a link to list a puppy that links to /new' do 
-      visit '/'
-      expect(page).to have_link("List a Puppy", href: '/new')
+      expect(page).to have_link("Click Here To List A Puppy")
     end
   end
 
-  describe 'GET /new' do 
+  describe 'GET /NEW' do
     it 'sends a 200 status code' do
       get '/new'
       expect(last_response.status).to eq(200)
     end
 
-    it 'renders a form that can POST a name, breed, and age' do
+    it 'renders the form' do
       visit '/new'
-
       expect(page).to have_selector("form")
-
-      #form method attribute is a post
-      expect(page.find('form')[:method]).to match(/post/i)
-      
       expect(page).to have_field(:name)
       expect(page).to have_field(:breed)
-      expect(page).to have_field(:months_old)
+      expect(page).to have_field(:age)
     end
   end
 
   describe 'POST /' do
-
-    before(:all) do
+    it "displays the puppy" do
       visit '/new'
 
       fill_in(:name, :with => "Butch")
       fill_in(:breed, :with => "Mastiff")
-      fill_in(:months_old, :with => "6")
-      
-      #the below css will match any element (input or button) 
-      #with a type attribute set to submit
-      page.find(:css, '[type=submit]').click
-    end
-
-    it "sends a 200 status code" do 
-      expect(page.status_code).to eq(200)
-    end
-
-    it "recieves a request from /new at /puppy" do
-      expect(page.current_path).to eq("/puppy")
-    end
-      
-    it "displays the puppy information dynamically" do 
-      # The \s below will match any whitespace
-      expect(page).to have_text(/Name:\s+Butch/i)
-      expect(page).to have_text(/Breed:\s+Mastiff/i)
-      expect(page).to have_text(/Age:\s+6 months/i)
-
-      #now do it again, to be sure it's not hard-coded
-      visit '/new'
-
-      fill_in(:name, :with => "Byron")
-      fill_in(:breed, :with => "Poodle")
-      fill_in(:months_old, :with => "9")
-
-      #the below css will match any element (input or button) 
-      #with a type attribute set to submit
-      page.find(:css, '[type=submit]').click
-
-      expect(page).to have_text(/Name:\s+Byron/i)
-      expect(page).to have_text(/Breed:\s+Poodle/i)
-      expect(page).to have_text(/Age:\s+9 months/i)
+      fill_in(:age, :with => "6 months")
+      click_button "submit"
+      expect(page).to have_text("Puppy Name: Butch")
+      expect(page).to have_text("Puppy Breed: Mastiff")
+      expect(page).to have_text("Puppy Age: 6 months")
     end
   end
+
 
 end
